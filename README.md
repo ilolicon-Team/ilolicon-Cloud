@@ -10,4 +10,5 @@ cp .env.example .env
 composer install
 php artisan admin:publish
 php artisan admin:install
+php artisan vendor:publish --provider="Yansongda\LaravelPay\PayServiceProvider" --tag=laravel-pay
 ```
