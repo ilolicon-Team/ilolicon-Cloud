@@ -14,4 +14,5 @@ Route::group([
 
     $router->get('/', 'HomeController@index');
     $router->resource('server', 'ServerController');
+    $router->resource('user', 'UserController');
 });
