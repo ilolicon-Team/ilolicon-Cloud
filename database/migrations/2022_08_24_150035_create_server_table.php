@@ -19,8 +19,8 @@ class CreateServerTable extends Migration
             $table->integer('password');
             $table->integer('hash');
             $table->integer('local');
-            $table->integer('status')->default('NULL')->nullable();
-            $table->integer('money')->default('NULL')->nullable();
+            $table->integer('status');
+            $table->integer('money')->default('0');
             $table->integer('max_user');
             $table->timestamps();
         });
