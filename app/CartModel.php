@@ -5,28 +5,28 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class GoodModel extends Model
+class CartModel extends Model
 {
     use SoftDeletes;
 
-    protected $table = 'goods';
+    protected $table = 'carts';
 
     protected $fillable = ['title', 'subtitle', 'price', 'description', 'level', 'display', 'configure_id', 'categories_id', 'server_id','purchase_limit','inventory','domain_config'];
 
     /**
      * 获取此商品所属分组
      */
-    public function getGoodCategories()
+    public function getCartCategories()
     {
-        return $this->belongsTo('App\GoodCategoriesModel', 'id', 'categories_id');
+        return $this->belongsTo('App\CartCategoriesModel', 'id', 'categories_id');
     }
 
     /**
      * 获取此商品所属分组
      */
-    public function getGoodConfigure()
+    public function getCartConfigure()
     {
-        return $this->belongsTo('App\GoodConfigureModel', 'id', 'configure_id');
+        return $this->belongsTo('App\CartConfigureModel', 'id', 'configure_id');
     }
 
     /**
@@ -39,7 +39,7 @@ class GoodModel extends Model
 
     public function order()
     {
-        return $this->hasMany('App\OrderModel','good_id','id');
+        return $this->hasMany('App\OrderModel','cart_id','id');
     }
 
     /**
@@ -48,7 +48,7 @@ class GoodModel extends Model
      */
     public function charging()
     {
-        return $this->hasMany('App\ChargingModel','good_id','id');
+        return $this->hasMany('App\ChargingModel','cart_id','id');
     }
 
 
@@ -63,7 +63,7 @@ class GoodModel extends Model
             return '未分组';
         }
         else {
-            return GoodCategoriesModel::find($value)->title;
+            return CartCategoriesModel::find($value)->title;
         }
     }
 

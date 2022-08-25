@@ -164,7 +164,7 @@ class ProxmoxController extends Controller
             [
                 'order_id'   => $order->id,
                 'user_id'    => $order->user_id,
-                'host_name'  => $order->good->title,
+                'host_name'  => $order->cart->title,
                 'host_pass'  => 'null',
                 'host_panel' => 'null',
                 'host_url'   => 'null'

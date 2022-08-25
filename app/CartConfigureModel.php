@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class GoodConfigureModel extends Model
+class CartConfigureModel extends Model
 {
-    protected $table = 'goods_configure';
+    protected $table = 'carts_configure';
 
     protected $fillable = [
         'title',
@@ -46,8 +46,8 @@ class GoodConfigureModel extends Model
         'customip',
     ];
 
-    public function getGood()
+    public function getcart()
     {
-        return $this->hasMany('App\GoodModel', 'configure_id', 'id');
+        return $this->hasMany('App\CartModel', 'configure_id', 'id');
     }
 }

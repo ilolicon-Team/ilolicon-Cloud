@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\GoodConfigureModel;
+use App\CartConfigureModel;
+use Dcat\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class GoodConfigureController extends Controller
+class CartConfigureController extends Controller
 {
 
     public $virtual_host_configure_form
@@ -79,12 +80,12 @@ class GoodConfigureController extends Controller
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function goodConfigureAddAction(Request $request)
+    public function cartConfigureAddAction(Request $request)
     {
         AdminController::checkAdminAuthority(Auth::user());
         $this->validateConfigureData($request);
 
-        GoodConfigureModel::create(
+        CartConfigureModel::create(
             [
                 'title'           => $request['title'],
                 'qps'             => $request['qps'],
@@ -125,7 +126,7 @@ class GoodConfigureController extends Controller
             ]
         );
 
-        return redirect(route('admin.good.show'));
+        return redirect(route('admin.cart.show'));
     }
 
     protected function getConfigure()
@@ -139,17 +140,17 @@ class GoodConfigureController extends Controller
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function goodConfigureEditAction(Request $request)
+    public function cartConfigureEditAction(Request $request)
     {
         AdminController::checkAdminAuthority(Auth::user());
         $this->validateConfigureData($request);
         $this->validate(
             $request, [
-                        'id' => 'exists:goods_configure,id|required',
+                        'id' => 'exists:carts_configure,id|required',
                     ]
         );
 
-        $configure = GoodConfigureModel::where(
+        $configure = CartConfigureModel::where(
             [
                 ['status', '!=', '0'],
                 ['id', $request['id']]
@@ -162,7 +163,7 @@ class GoodConfigureController extends Controller
         }
         $configure->save();
 
-        return redirect(route('admin.good.show'))->with(['status' => 'success']);
+        return redirect(route('admin.cart.show'))->with(['status' => 'success']);
     }
 
     /**
@@ -171,16 +172,16 @@ class GoodConfigureController extends Controller
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function goodConfigureDelAction(Request $request)
+    public function cartConfigureDelAction(Request $request)
     {
         AdminController::checkAdminAuthority(Auth::user());
         //        dd($request->id);
         $this->validate(
             $request, [
-                        'id' => 'exists:goods_configure,id|required'
+                        'id' => 'exists:carts_configure,id|required'
                     ]
         );
-        GoodConfigureModel::where('id', $request['id'])->update(['status' => 0]);
-        return redirect(route('admin.good.show'));
+        CartConfigureModel::where('id', $request['id'])->update(['status' => 0]);
+        return redirect(route('admin.cart.show'));
     }
 }

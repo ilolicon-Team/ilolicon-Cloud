@@ -11,11 +11,11 @@ class ChargingModel extends Model
 
     protected $table = 'charging';
 
-    protected $fillable = ['time', 'unit', 'money', 'good_id', 'content'];
+    protected $fillable = ['time', 'unit', 'money', 'cart_id', 'content'];
 
-    public function getGood()
+    public function getCart()
     {
-        return $this->hasOne('App\GoodModel', 'id', 'good_id');
+        return $this->hasOne('App\CartModel', 'id', 'cart_id');
     }
 
     public function getUnitAttribute($value)
