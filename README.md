@@ -6,8 +6,9 @@
 ```
 git clone git@github.com:ilolicon-Team/ilolicon-Cloud.git
 cp .env.example .env
-# Write your database username and password
+<!-- Write your database username and password -->
 composer install
-php artisan admin:publish
-php artisan admin:install
+<!-- php artisan admin:publish
+php artisan admin:install -->
+php artisan migrate
 ```
